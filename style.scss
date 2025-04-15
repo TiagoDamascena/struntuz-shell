@@ -18,3 +18,26 @@ window.Bar {
         margin: 2px;
     }
 }
+
+window.Corner {
+    box {
+        min-width: 10px;
+        min-height: 10px;
+    }
+
+    &.TopLeft box {
+        background: radial-gradient(circle at bottom right, transparent 10px, black 1px);
+    }
+
+    &.TopRight box {
+        background: radial-gradient(circle at bottom left, transparent 10px, black 1px);
+    }
+
+    &.BottomLeft box {
+        background: radial-gradient(circle at top right, transparent 10px, black 1px);
+    }
+
+    &.BottomRight box {
+        background: radial-gradient(circle at top left, transparent 10px, black 1px);
+    }
+}
