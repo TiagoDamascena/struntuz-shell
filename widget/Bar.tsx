@@ -1,6 +1,8 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk4"
 import Clock from "./Clock";
 import SystemButton from "./SystemButton";
+import Divider from "./Divider";
+import Workspaces from "./Workspaces";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -25,6 +27,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             halign={Gtk.Align.START}
           >
             <SystemButton />
+            <Divider />
+            <Workspaces gdkmonitor={gdkmonitor} />
           </box>
           <box
             cssClasses={["Center"]}

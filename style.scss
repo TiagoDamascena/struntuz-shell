@@ -1,5 +1,8 @@
-$fg-color: #CDD6F4;
 $bg-color: rgba(17, 16, 27, .75);
+$fg-color: #CDD6F4;
+$fg-color-disabled: #6C7086;
+$primary-color: #EA76CB;
+$secondary-color: #D35D6E;
 
 window.Bar {
     background: transparent;
@@ -34,6 +37,38 @@ window.Bar {
 
             &.System {
                 background-color: #89b4fa;
+            }
+        }
+    }
+
+    .Divider {
+        padding: 10px 2px;
+
+        .Circle {
+            min-width: 6px;
+            min-height: 6px;
+            border-radius: 50%;
+            background: $fg-color-disabled;
+        }
+    }
+
+    .Workspaces {
+        .Workspace {
+            padding: 0 6px;
+            margin: 0 2px;
+            color: $fg-color-disabled;
+            font-size: 14px;
+
+            &.Occupied {
+                color: $fg-color;
+            }
+
+            &.Active {
+                color: $primary-color;
+            }
+
+            &:hover {
+                color: $secondary-color;
             }
         }
     }
