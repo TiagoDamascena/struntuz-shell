@@ -1,8 +1,6 @@
-import { App, Astal, Gdk } from "astal/gtk4"
-import { Variable } from "astal"
+import { App, Astal, Gdk, Gtk } from "astal/gtk4"
 import Clock from "./Clock";
-
-const time = Variable("").poll(1000, "date")
+import SystemButton from "./SystemButton";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -21,11 +19,25 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
     >
       <box cssClasses={["Panel"]}>
         <centerbox hexpand={true}>
-          <box></box>
-          <box>
+          <box
+            cssClasses={["Start"]}
+            spacing={10}
+            halign={Gtk.Align.START}
+          >
+            <SystemButton />
+          </box>
+          <box
+            cssClasses={["Center"]}
+            spacing={10}
+            halign={Gtk.Align.CENTER}
+          >
             <Clock />
           </box>
-          <box></box>
+          <box
+            cssClasses={["End"]}
+            spacing={10}
+            halign={Gtk.Align.END}
+          ></box>
         </centerbox>
       </box>
     </window>

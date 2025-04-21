@@ -6,12 +6,36 @@ window.Bar {
     color: $fg-color;
     font-weight: bold;
 
+    button {
+        all: unset;
+    }
+
     .Panel {
         min-height: 26px;
         padding: 6px 15px;
         border-radius: 10px;
         background: $bg-color;
         color: $fg-color;
+    }
+
+    .Button {
+        padding: 0 5px;
+        border-radius: 20px;
+        transition-property: background-color, color;
+        transition-duration: 0.4s;
+        transition-timing-function: ease-out;
+        transition-delay: 200ms;
+
+        &.Active {
+            background-color: #cba6f7;
+            color: #1e1e2e;
+            transition-duration: 200ms;
+            transition-delay: 0;
+
+            &.System {
+                background-color: #89b4fa;
+            }
+        }
     }
 }
 
