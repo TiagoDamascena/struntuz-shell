@@ -7,7 +7,6 @@ $secondary-color: #D35D6E;
 window.Bar {
     background: transparent;
     color: $fg-color;
-    font-weight: bold;
 
     button {
         all: unset;
@@ -70,6 +69,19 @@ window.Bar {
             &:hover {
                 color: $secondary-color;
             }
+        }
+    }
+
+    .Battery {
+        color: #FFFFFF;
+
+        .Icon {
+            -gtk-icon-size: 26px;
+        }
+
+        &.Active {
+            padding: 0 10px;
+            background-color: #a6e3a1;
         }
     }
 }

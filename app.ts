@@ -5,6 +5,7 @@ import Corners from "./widget/Corners"
 
 App.start({
     css: style,
+    icons: 'assets/icons',
     main() {
         App.get_monitors().map(Bar)
         App.get_monitors().map(Corners)

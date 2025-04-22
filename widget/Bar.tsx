@@ -3,6 +3,7 @@ import Clock from "./Clock";
 import SystemButton from "./SystemButton";
 import Divider from "./Divider";
 import Workspaces from "./Workspaces";
+import Battery from "./Battery";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -41,7 +42,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             cssClasses={["End"]}
             spacing={10}
             halign={Gtk.Align.END}
-          ></box>
+          >
+            <Battery/>
+          </box>
         </centerbox>
       </box>
     </window>
