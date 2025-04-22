@@ -5,6 +5,7 @@ import Divider from "./Divider";
 import Workspaces from "./Workspaces";
 import Battery from "./Battery";
 import Tray from "./Tray";
+import Audio from "./Audio";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -45,6 +46,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             halign={Gtk.Align.END}
           >
             <Tray />
+            <Audio />
             <Battery/>
           </box>
         </centerbox>

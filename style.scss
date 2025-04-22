@@ -92,6 +92,19 @@ window.Bar {
             }
         }
     }
+
+    .Audio {
+        color: #FFFFFF;
+
+        .Icon {
+            -gtk-icon-size: 26px;
+        }
+
+        &.Active {
+            padding: 0 10px;
+            background-color: #cba6f7;
+        }
+    }
 }
 
 window.Corner {
