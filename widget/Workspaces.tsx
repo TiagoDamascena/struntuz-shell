@@ -10,7 +10,7 @@ const Workspace = ({id, gdkmonitor}: {id: number, gdkmonitor: Gdk.Monitor}) => {
     return workspaces.map((workspace) => workspace.id).includes(id);
   });
 
-  const active = Variable.derive([bind(hyprland, "monitors")], (monitors) => {
+  const active = Variable.derive([bind(hyprland, "monitors"), bind(hyprland, "focusedWorkspace")], (monitors) => {
     const monitor = monitors.find((monitor) => {
       return monitor.name === gdkmonitor.get_connector()
     });
