@@ -7,10 +7,19 @@ const Audio = () => {
   const speaker = wireplumber?.defaultSpeaker!;
 
   const active = Variable(false);
+  const name = Variable.derive([bind(speaker, "name"), bind(speaker, "description")], (name, description) => name ?? description);
   const volume = Variable.derive([bind(speaker, "volume")], (volume) => Math.floor(volume * 100));
   const muted = Variable.derive([bind(speaker, "mute")], (mute) => mute);
 
-  const icon = Variable.derive([volume, muted], (volume, muted) => {
+  const icon = Variable.derive([volume, muted, name], (volume, muted, name) => {
+    if (name) {
+      const lowercaseName = name.toLowerCase();
+
+      if (lowercaseName.includes('headphones') || lowercaseName.includes('headset')) {
+        return "headphones";
+      }
+    }
+
     if (muted) {
       return "speaker-mute";
     }
@@ -29,6 +38,7 @@ const Audio = () => {
 
     return "speaker-wave-0";
   });
+
 
   const classNames = Variable.derive([active], (active) => {
     const classes = ["Audio", "Button"];
