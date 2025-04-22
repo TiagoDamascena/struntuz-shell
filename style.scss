@@ -84,6 +84,14 @@ window.Bar {
             background-color: #a6e3a1;
         }
     }
+
+    .Tray {
+        .TrayItem {
+            image {
+                -gtk-icon-size: 20px;
+            }
+        }
+    }
 }
 
 window.Corner {
