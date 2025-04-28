@@ -1,5 +1,5 @@
 import { bind, Variable } from "astal";
-import { Gtk } from "astal/gtk4";
+import { Gdk, Gtk } from "astal/gtk4";
 import BatteryService from "gi://AstalBattery";
 
 const Battery = () => {
@@ -54,26 +54,30 @@ const Battery = () => {
   };
 
   return (
-    <box
+    <button
       cssClasses={classNames()}
-      spacing={active().as((active) => active ? 10 : 0)}
-      onHoverEnter={handleHoverEnter}
-      onHoverLeave={handleHoverLeave}
+      cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
-      <image
-        cssClasses={["Icon"]}
-        iconName={icon()}
-      />
-      <revealer
-        revealChild={active()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-        transitionDuration={200}
+      <box
+        spacing={active().as((active) => active ? 5 : 0)}
+        onHoverEnter={handleHoverEnter}
+        onHoverLeave={handleHoverLeave}
       >
-        <label>
-          {percentage().as((percentage) => `${percentage}%`)}
-        </label>
-      </revealer>
-    </box>
+        <image
+          cssClasses={["Icon"]}
+          iconName={icon()}
+        />
+        <revealer
+          revealChild={active()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+          transitionDuration={200}
+        >
+          <label>
+            {percentage().as((percentage) => `${percentage}%`)}
+          </label>
+        </revealer>
+      </box>
+    </button>
   )
 };
 

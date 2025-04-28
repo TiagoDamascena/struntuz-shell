@@ -1,3 +1,5 @@
+import { Gtk } from "astal/gtk4";
+
 const Divider = () => {
   return (
     <box
@@ -5,6 +7,9 @@ const Divider = () => {
     >
       <box
         cssClasses={["Circle"]}
+        hexpand={false}
+        vexpand={false}
+        valign={Gtk.Align.CENTER}
       />
     </box>
   );

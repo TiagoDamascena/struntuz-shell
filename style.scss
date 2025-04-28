@@ -13,8 +13,8 @@ window.Bar {
     }
 
     .Panel {
-        min-height: 26px;
-        padding: 6px 15px;
+        min-height: 32px;
+        padding: 4px 15px;
         border-radius: 10px;
         background: $bg-color;
         color: $fg-color;
@@ -41,7 +41,7 @@ window.Bar {
     }
 
     .Divider {
-        padding: 10px 2px;
+        padding: 10px 4px;
 
         .Circle {
             min-width: 6px;
@@ -80,7 +80,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 26px;
+            -gtk-icon-size: 32px;
         }
 
         &.Active {
@@ -101,7 +101,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 26px;
+            -gtk-icon-size: 32px;
         }
 
         &.Active {

@@ -64,7 +64,7 @@ const Audio = () => {
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
       <box
-        spacing={active().as((active) => active ? 10 : 0)}
+        spacing={active().as((active) => active ? 5 : 0)}
         onHoverEnter={handleHoverEnter}
         onHoverLeave={handleHoverLeave}
       >
