@@ -17,7 +17,10 @@ const SystemButton = () => {
       onHoverEnter={handleHoverEnter}
       onHoverLeave={handleHoverLeave}
     >
-      <image file={"./assets/images/nixos.svg"}/>
+      <image
+        cssClasses={["Icon"]}
+        file={"./assets/images/nixos.svg"}
+      />
     </button>
   );
 }

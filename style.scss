@@ -34,9 +34,16 @@ window.Bar {
             transition-duration: 200ms;
             transition-delay: 0;
 
-            &.System {
-                background-color: #89b4fa;
-            }
+        }
+    }
+
+    .System {
+        .Icon {
+            -gtk-icon-size: 18px;
+        }
+
+        &.Active {
+            background-color: #89b4fa;
         }
     }
 
@@ -107,6 +114,19 @@ window.Bar {
         &.Active {
             padding: 0 10px;
             background-color: #cba6f7;
+        }
+    }
+
+    .Network {
+        color: #FFFFFF;
+
+        .Icon {
+            -gtk-icon-size: 32px;
+        }
+
+        &.Active {
+            padding: 0 10px;
+            background-color: #89b4fa;
         }
     }
 }

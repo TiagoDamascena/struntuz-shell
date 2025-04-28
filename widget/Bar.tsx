@@ -6,6 +6,7 @@ import Workspaces from "./Workspaces";
 import Battery from "./Battery";
 import Tray from "./Tray";
 import Audio from "./Audio";
+import Network from "./Network";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -47,6 +48,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           >
             <Tray />
             <Audio />
+            <Network />
             <Battery/>
           </box>
         </centerbox>
