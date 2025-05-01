@@ -1,7 +1,7 @@
 import Hyprland from "gi://AstalHyprland"
 import { bind, execAsync, Variable } from "astal";
 import { Gdk } from "astal/gtk4";
-import { range } from "../utils/array";
+import { range } from "../../../utils/array";
 
 const hyprland = Hyprland.get_default()
 

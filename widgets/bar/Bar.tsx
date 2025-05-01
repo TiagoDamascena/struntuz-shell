@@ -1,12 +1,13 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk4"
-import Clock from "./Clock";
-import SystemButton from "./SystemButton";
-import Divider from "./Divider";
-import Workspaces from "./Workspaces";
-import Battery from "./Battery";
-import Tray from "./Tray";
-import Audio from "./Audio";
-import Network from "./Network";
+import Clock from "./components/Clock";
+import SystemButton from "./components/SystemButton";
+import Divider from "./components/Divider";
+import Workspaces from "./components/Workspaces";
+import Battery from "./components/Battery";
+import Tray from "./components/Tray";
+import Audio from "./components/Audio";
+import Network from "./components/Network";
+import ControlCenterButton from "./components/ControlCenterButton";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 
@@ -49,7 +50,8 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Tray />
             <Audio />
             <Network />
-            <Battery/>
+            <Battery />
+            <ControlCenterButton />
           </box>
         </centerbox>
       </box>
