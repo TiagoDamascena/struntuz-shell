@@ -1,11 +1,12 @@
-import { Astal, Gdk, App } from "astal/gtk4";
+import { Astal, Gdk } from "ags/gtk4";
+import app from "ags/gtk4/app";
 
 export default function Corners(monitor: Gdk.Monitor) {
   const corners = ['TopLeft', 'TopRight', 'BottomLeft', 'BottomRight'];
 
   return corners.map((corner) => (
     <window
-      application={App}
+      application={app}
       gdkmonitor={monitor}
       visible={true}
       layer={Astal.Layer.OVERLAY}

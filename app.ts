@@ -1,13 +1,15 @@
-import { App } from "astal/gtk4"
+import app from "ags/gtk4/app"
 import style from "./style.scss"
 import Bar from "./widgets/bar/Bar"
 import Corners from "./widgets/corners/Corners"
 
-App.start({
-    css: style,
-    icons: 'assets/icons',
-    main() {
-        App.get_monitors().map(Bar)
-        App.get_monitors().map(Corners)
-    },
+app.start({
+  css: style,
+  icons: 'assets/icons',
+  main() {
+    app.get_monitors().map(monitor => {
+      Bar(monitor)
+      Corners(monitor)
+    })
+  },
 })

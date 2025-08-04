@@ -1,17 +1,20 @@
-import { bind, Variable } from "astal";
-import { Gdk, Gtk } from "astal/gtk4";
+import { createBinding, createComputed, createState } from "ags";
+import { Gdk, Gtk } from "ags/gtk4";
 import WirePlumber from "gi://AstalWp";
 
 const Audio = () => {
   const wireplumber = WirePlumber.get_default();
   const speaker = wireplumber?.defaultSpeaker!;
 
-  const active = Variable(false);
-  const name = Variable.derive([bind(speaker, "name"), bind(speaker, "description")], (name, description) => name ?? description);
-  const volume = Variable.derive([bind(speaker, "volume")], (volume) => Math.floor(volume * 100));
-  const muted = Variable.derive([bind(speaker, "mute")], (mute) => mute);
+  const [active, setActive] = createState(false);
 
-  const icon = Variable.derive([volume, muted, name], (volume, muted, name) => {
+  const name = createBinding(speaker, "name");
+  const description = createBinding(speaker, "description");
+
+  const volume = createBinding(speaker, "volume").as((volume) => Math.floor(volume * 100));
+  const muted = createBinding(speaker, "mute");
+
+  const icon = createComputed([volume, muted, name], (volume, muted, name) => {
     if (name) {
       const lowercaseName = name.toLowerCase();
 
@@ -40,7 +43,7 @@ const Audio = () => {
   });
 
 
-  const classNames = Variable.derive([active], (active) => {
+  const classNames = createComputed([active], (active) => {
     const classes = ["Audio", "Button"];
 
     if (active) {
@@ -51,33 +54,35 @@ const Audio = () => {
   });
 
   const handleHoverEnter = () => {
-    active.set(true);
+    setActive(true);
   };
 
   const handleHoverLeave = () => {
-    active.set(false);
+    setActive(false);
   };
 
   return (
     <button
-      cssClasses={classNames()}
+      cssClasses={classNames}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
+      <Gtk.EventControllerMotion
+        onEnter={handleHoverEnter}
+        onLeave={handleHoverLeave}
+      />
       <box
-        spacing={active().as((active) => active ? 5 : 0)}
-        onHoverEnter={handleHoverEnter}
-        onHoverLeave={handleHoverLeave}
+        spacing={active.as((active) => active ? 5 : 0)}
       >
         <image
           cssClasses={["Icon"]}
-          iconName={icon()}
+          iconName={icon}
         />
         <revealer
-          revealChild={active()}
+          revealChild={active}
           transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
           transitionDuration={200}
         >
-          <label>{volume().as((volume) => `${volume}%`)}</label>
+          <label label={volume.as((volume) => `${volume}%`)} />
         </revealer>
       </box>
     </button>

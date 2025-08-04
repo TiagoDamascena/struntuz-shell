@@ -1,22 +1,34 @@
-import { Gdk, Gtk } from "astal/gtk4";
+import { createComputed, createState } from "ags";
+import { Gdk, Gtk } from "ags/gtk4";
 
 const SystemButton = () => {
+  const [active, setActive] = createState(false);
 
-  const handleHoverEnter = (self: Gtk.Button) => {
-    self.add_css_class("Active");
-  }
+  const handleHoverEnter = () => {
+    setActive(true);
+  };
 
-  const handleHoverLeave = (self: Gtk.Button) => {
-    self.remove_css_class("Active");
-  }
+  const handleHoverLeave = () => {
+    setActive(false);
+  };
+
+  const classNames = createComputed([active], (active) => {
+    const classes = ["Button", "System"];
+    if (active) {
+      classes.push("Active");
+    }
+    return classes;
+  });
 
   return (
     <button
-      cssClasses={["Button", "System"]}
+      cssClasses={classNames}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
-      onHoverEnter={handleHoverEnter}
-      onHoverLeave={handleHoverLeave}
     >
+      <Gtk.EventControllerMotion
+        onEnter={handleHoverEnter}
+        onLeave={handleHoverLeave}
+      />
       <image
         cssClasses={["Icon"]}
         file={"./assets/images/nixos.svg"}

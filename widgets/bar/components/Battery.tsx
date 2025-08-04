@@ -1,25 +1,20 @@
-import { bind, Variable } from "astal";
-import { Gdk, Gtk } from "astal/gtk4";
+import { createBinding, createComputed, createState } from "ags";
+import { Gdk, Gtk } from "ags/gtk4";
 import BatteryService from "gi://AstalBattery";
 
 const Battery = () => {
   const battery = BatteryService.get_default();
 
   if (!battery.isPresent) {
-    return null;
+    return <></>;
   }
 
-  const active = Variable(false);
+  const [active, setActive] = createState(false);
 
-  const charging = Variable.derive([bind(battery, "charging")], (charging) => {
-    return charging;
-  });
+  const charging = createBinding(battery, "charging");
+  const percentage = createBinding(battery, "percentage").as((percentage) => Math.floor(percentage * 100));
 
-  const percentage = Variable.derive([bind(battery, "percentage")], (percentage) => {
-    return Math.floor(percentage * 100);
-  });
-
-  const icon = Variable.derive([percentage, charging], (percentage, charging) => {
+  const icon = createComputed([percentage, charging], (percentage, charging) => {
     let level = 0;
 
     if (percentage >= 0.9) {
@@ -35,7 +30,7 @@ const Battery = () => {
     return `battery-${level}${charging ? '-charging' : ''}`;
   });
 
-  const classNames = Variable.derive([active], (active) => {
+  const classNames = createComputed([active], (active) => {
     const classes = ["Battery", "Button"];
 
     if (active) {
@@ -46,35 +41,35 @@ const Battery = () => {
   })
 
   const handleHoverEnter = () => {
-    active.set(true);
+    setActive(true);
   };
 
   const handleHoverLeave = () => {
-    active.set(false);
+    setActive(false);
   };
 
   return (
     <button
-      cssClasses={classNames()}
+      cssClasses={classNames}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
+      <Gtk.EventControllerMotion
+        onEnter={handleHoverEnter}
+        onLeave={handleHoverLeave}
+      />
       <box
-        spacing={active().as((active) => active ? 5 : 0)}
-        onHoverEnter={handleHoverEnter}
-        onHoverLeave={handleHoverLeave}
+        spacing={active.as((active) => active ? 5 : 0)}
       >
         <image
           cssClasses={["Icon"]}
-          iconName={icon()}
+          iconName={icon}
         />
         <revealer
-          revealChild={active()}
+          revealChild={active}
           transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
           transitionDuration={200}
         >
-          <label>
-            {percentage().as((percentage) => `${percentage}%`)}
-          </label>
+          <label label={percentage.as((percentage) => `${percentage}%`)} />
         </revealer>
       </box>
     </button>

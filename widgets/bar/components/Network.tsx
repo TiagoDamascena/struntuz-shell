@@ -1,9 +1,12 @@
-import { bind, Binding, Variable } from "astal";
-import { Gdk, Gtk } from "astal/gtk4";
+import { Accessor, createBinding, createComputed, createState, With } from "ags";
+import { Gdk, Gtk } from "ags/gtk4";
 import NetworkService from "gi://AstalNetwork";
 
-const Wifi = ({wifi, active}: {wifi: NetworkService.Wifi, active: Variable<boolean>}) => {
-  const icon = Variable.derive([bind(wifi, "strength")], (strength) => {
+const Wifi = ({wifi, active}: {wifi: NetworkService.Wifi, active: Accessor<boolean>}) => {
+  const ssid = createBinding(wifi, "ssid");
+  const strength = createBinding(wifi, "strength");
+
+  const icon = createComputed([strength], (strength) => {
     if (strength >= 75) {
       return 'wifi-3';
     }
@@ -20,20 +23,18 @@ const Wifi = ({wifi, active}: {wifi: NetworkService.Wifi, active: Variable<boole
     return 'wifi-0';
   });
 
-  const ssid = Variable.derive([bind(wifi, "ssid")], (ssid) => ssid);
-
   return (
     <>
       <image
         cssClasses={["Icon"]}
-        iconName={icon()}
+        iconName={icon}
       />
       <revealer
-        revealChild={active()}
+        revealChild={active}
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={200}
       >
-        <label>{ssid().as((ssid) => ssid)}</label>
+        <label label={ssid} />
       </revealer>
     </>
   );
@@ -42,10 +43,10 @@ const Wifi = ({wifi, active}: {wifi: NetworkService.Wifi, active: Variable<boole
 const Network = () => {
   const network = NetworkService.get_default();
 
-  const active = Variable(false);
-  const primary = Variable.derive([bind(network, "primary")], (primary) => primary);
+  const [active, setActive] = createState(false);
+  const primary = createBinding(network, "primary");
 
-  const classNames = Variable.derive([active], (active) => {
+  const classNames = createComputed([active], (active) => {
     const classes = ["Network", "Button"];
 
     if (active) {
@@ -56,33 +57,31 @@ const Network = () => {
   });
 
   const handleHoverEnter = () => {
-    active.set(true);
+    setActive(true);
   };
 
   const handleHoverLeave = () => {
-    active.set(false);
+    setActive(false);
   };
 
   return (
     <button
-      cssClasses={classNames()}
+      cssClasses={classNames}
       cursor={Gdk.Cursor.new_from_name("pointer", null)}
     >
+      <Gtk.EventControllerMotion
+        onEnter={handleHoverEnter}
+        onLeave={handleHoverLeave}
+      />
       <box
-        spacing={active().as((active) => active ? 5 : 0)}
-        onHoverEnter={handleHoverEnter}
-        onHoverLeave={handleHoverLeave}
+        spacing={active.as((active) => active ? 5 : 0)}
       >
-        {primary().as((type) => {
-          if (type === NetworkService.Primary.WIFI) {
-            return (
-              <Wifi
-                active={active}
-                wifi={network.wifi}
-              />
-            );
-          }
-        })}
+        {primary.as((type) => type === NetworkService.Primary.WIFI) && (
+          <Wifi
+            active={active}
+            wifi={network.wifi}
+          />
+        )}
       </box>
     </button>
   );

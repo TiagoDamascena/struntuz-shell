@@ -1,16 +1,17 @@
-import { GLib, Variable } from "astal"
+import { createBinding, createComputed, createState } from "ags";
+import { createPoll } from "ags/time";
+import GLib from "gi://GLib";
 
 const Clock = () => {
-  const time = Variable("").poll(1000, () => {
+  const time = createPoll("", 1000, () => {
     const date = GLib.DateTime.new_now_local()
-    return date.format('%A, %d de %B %H:%M')!
-  })
+    return date.format('%A, %d de %B %H:%M')!;
+  });
 
   return (
     <label
       cssClasses={["Clock"]}
-      label={time()}
-      onDestroy={() => time.drop()}
+      label={time}
     />
   )
 }

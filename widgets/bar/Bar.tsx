@@ -1,4 +1,5 @@
-import { App, Astal, Gdk, Gtk } from "astal/gtk4"
+import { Astal, Gdk, Gtk } from "ags/gtk4"
+import app from "ags/gtk4/app"
 import Clock from "./components/Clock";
 import SystemButton from "./components/SystemButton";
 import Divider from "./components/Divider";
@@ -13,10 +14,10 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   return (
     <window
-      application={App}
+      application={app}
       gdkmonitor={gdkmonitor}
       visible={true}
-      cssClasses={["Bar"]}
+      class="Bar"
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       layer={Astal.Layer.BOTTOM}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
@@ -25,8 +26,9 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       marginRight={10}
     >
       <box cssClasses={["Panel"]}>
-        <centerbox hexpand={true}>
+        <centerbox hexpand={true} vexpand={true}>
           <box
+            $type="start"
             cssClasses={["Start"]}
             spacing={10}
             halign={Gtk.Align.START}
@@ -36,6 +38,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Workspaces gdkmonitor={gdkmonitor} />
           </box>
           <box
+            $type="center"
             cssClasses={["Center"]}
             spacing={10}
             halign={Gtk.Align.CENTER}
@@ -43,6 +46,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Clock />
           </box>
           <box
+            $type="end"
             cssClasses={["End"]}
             spacing={10}
             halign={Gtk.Align.END}
