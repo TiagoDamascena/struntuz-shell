@@ -1,4 +1,4 @@
-import { Accessor, createBinding, createComputed, createState, With } from "ags";
+import { Accessor, createBinding, createComputed, createState } from "ags";
 import { Gdk, Gtk } from "ags/gtk4";
 import NetworkService from "gi://AstalNetwork";
 

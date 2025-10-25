@@ -1,8 +1,9 @@
 import Hyprland from "gi://AstalHyprland"
-import { createBinding, createComputed, createState } from "ags";
+import { createBinding, createComputed } from "ags";
 import { Gdk } from "ags/gtk4";
 import { execAsync } from "ags/process";
-import { range } from "../../../utils/array";
+
+import { range } from "@/utils/array";
 
 const hyprland = Hyprland.get_default()
 

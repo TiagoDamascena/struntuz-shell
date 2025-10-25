@@ -31,7 +31,7 @@ const SystemButton = () => {
       />
       <image
         cssClasses={["Icon"]}
-        file={"./assets/images/nixos.svg"}
+        file={`${SRC}/assets/images/nixos.svg`}
       />
     </button>
   );

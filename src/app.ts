@@ -1,11 +1,12 @@
 import app from "ags/gtk4/app"
-import style from "./style.scss"
-import Bar from "./widgets/bar/Bar"
-import Corners from "./widgets/corners/Corners"
+import Bar from "@/widgets/Bar"
+import Corners from "@/widgets/Corners"
+
+import style from "./styles/main.scss";
 
 app.start({
   css: style,
-  icons: 'assets/icons',
+  icons: `${SRC}/assets/icons`,
   main() {
     app.get_monitors().map(monitor => {
       Bar(monitor)

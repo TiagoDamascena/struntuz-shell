@@ -1,12 +1,8 @@
-$bg-color: rgba(17, 16, 27, .75);
-$fg-color: #CDD6F4;
-$fg-color-disabled: #6C7086;
-$primary-color: #EA76CB;
-$secondary-color: #D35D6E;
+@use "../theme" as theme;
 
 window.Bar {
     background: transparent;
-    color: $fg-color;
+    color: theme.$fg-color;
 
     button {
         all: unset;
@@ -16,8 +12,8 @@ window.Bar {
         min-height: 32px;
         padding: 4px 15px;
         border-radius: 10px;
-        background: $bg-color;
-        color: $fg-color;
+        background: theme.$bg-color;
+        color: theme.$fg-color;
     }
 
     .Button {
@@ -33,13 +29,12 @@ window.Bar {
             color: #1e1e2e;
             transition-duration: 200ms;
             transition-delay: 0;
-
         }
     }
 
     .System {
         .Icon {
-            -gtk-icon-size: 18px;
+            -gtk-icon-size: 16px;
         }
 
         &.Active {
@@ -54,7 +49,7 @@ window.Bar {
             min-width: 6px;
             min-height: 6px;
             border-radius: 50%;
-            background: $fg-color-disabled;
+            background: theme.$fg-color-disabled;
         }
     }
 
@@ -66,19 +61,19 @@ window.Bar {
         .Workspace {
             padding: 0 6px;
             margin: 0 2px;
-            color: $fg-color-disabled;
+            color: theme.$fg-color-disabled;
             font-size: 14px;
 
             &.Occupied {
-                color: $fg-color;
+                color: theme.$fg-color;
             }
 
             &.Active {
-                color: $primary-color;
+                color: theme.$primary-color;
             }
 
             &:hover {
-                color: $secondary-color;
+                color: theme.$secondary-color;
             }
         }
     }
@@ -140,28 +135,5 @@ window.Bar {
         &.Active {
             background-color: #fa8989;
         }
-    }
-}
-
-window.Corner {
-    box {
-        min-width: 10px;
-        min-height: 10px;
-    }
-
-    &.TopLeft box {
-        background: radial-gradient(circle at bottom right, transparent 10px, black 1px);
-    }
-
-    &.TopRight box {
-        background: radial-gradient(circle at bottom left, transparent 10px, black 1px);
-    }
-
-    &.BottomLeft box {
-        background: radial-gradient(circle at top right, transparent 10px, black 1px);
-    }
-
-    &.BottomRight box {
-        background: radial-gradient(circle at top left, transparent 10px, black 1px);
     }
 }

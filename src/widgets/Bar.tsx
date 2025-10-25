@@ -1,14 +1,15 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4"
 import app from "ags/gtk4/app"
-import Clock from "./components/Clock";
-import SystemButton from "./components/SystemButton";
-import Divider from "./components/Divider";
-import Workspaces from "./components/Workspaces";
-import Battery from "./components/Battery";
-import Tray from "./components/Tray";
-import Audio from "./components/Audio";
-import Network from "./components/Network";
-import ControlCenterButton from "./components/ControlCenterButton";
+
+import Audio from "@/components/bar/Audio";
+import Battery from "@/components/bar/Battery";
+import Clock from "@/components/bar/Clock";
+import ControlCenterButton from "@/components/bar/ControlCenterButton";
+import Divider from "@/components/bar/Divider";
+import Network from "@/components/bar/Network";
+import SystemButton from "@/components/bar/SystemButton";
+import Tray from "@/components/bar/Tray";
+import Workspaces from "@/components/bar/Workspaces";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
 

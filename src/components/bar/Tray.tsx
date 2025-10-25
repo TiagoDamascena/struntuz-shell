@@ -1,6 +1,7 @@
 import { createBinding, For } from "ags";
 import { Gdk } from "ags/gtk4";
 import TrayService from "gi://AstalTray";
+
 import Divider from "./Divider";
 
 const TrayItem = ({item}: {item: TrayService.TrayItem}) => {
