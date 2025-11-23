@@ -33,6 +33,8 @@ window.Bar {
     }
 
     .System {
+        padding: 0 8px;
+
         .Icon {
             -gtk-icon-size: 16px;
         }
@@ -54,7 +56,8 @@ window.Bar {
     }
 
     .Clock {
-        font-weight: bold;
+        font-weight: normal;
+        font-size: 14px;
     }
 
     .Workspaces {
@@ -82,7 +85,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 32px;
+            -gtk-icon-size: 28px;
         }
 
         &.Active {
@@ -103,7 +106,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 32px;
+            -gtk-icon-size: 28px;
         }
 
         &.Active {
@@ -116,7 +119,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 32px;
+            -gtk-icon-size: 28px;
         }
 
         &.Active {
@@ -129,7 +132,7 @@ window.Bar {
         color: #FFFFFF;
 
         .Icon {
-            -gtk-icon-size: 32px;
+            -gtk-icon-size: 28px;
         }
 
         &.Active {

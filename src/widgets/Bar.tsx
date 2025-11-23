@@ -1,5 +1,5 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4"
-import app from "ags/gtk4/app"
+import { onCleanup } from "ags";
 
 import Audio from "@/components/bar/Audio";
 import Battery from "@/components/bar/Battery";
@@ -11,12 +11,12 @@ import SystemButton from "@/components/bar/SystemButton";
 import Tray from "@/components/bar/Tray";
 import Workspaces from "@/components/bar/Workspaces";
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export default function Bar({monitor}: {monitor: Gdk.Monitor}) {
 
   return (
     <window
-      application={app}
-      gdkmonitor={gdkmonitor}
+      name={`Bar-${monitor.get_connector()}`}
+      gdkmonitor={monitor}
       visible={true}
       class="Bar"
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
@@ -25,6 +25,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       marginTop={10}
       marginLeft={10}
       marginRight={10}
+      $={(self) => onCleanup(() => self.destroy())}
     >
       <box cssClasses={["Panel"]}>
         <centerbox hexpand={true} vexpand={true}>
@@ -36,7 +37,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           >
             <SystemButton />
             <Divider />
-            <Workspaces gdkmonitor={gdkmonitor} />
+            <Workspaces gdkmonitor={monitor} />
           </box>
           <box
             $type="center"
